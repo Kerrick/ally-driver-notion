@@ -3,13 +3,13 @@
 
 ## Table of contents
 
-- [Ally custom driver boilerplate](#ally-custom-driver-boilerplate)
+- [Ally driver Notion boilerplate](#ally-driver-notion-boilerplate)
   - [Getting started](#getting-started)
   - [How is the code structured?](#how-is-the-code-structured)
-    - [YourDriverAccessToken](#yourdriveraccesstoken)
-    - [YourDriverScopes](#yourdriverscopes)
-    - [YourDriverConfig](#yourdriverconfig)
-    - [YourDriver](#yourdriver)
+    - [NotionAccessToken](#notionaccesstoken)
+    - [NotionScopes](#notionscopes)
+    - [NotionConfig](#notionconfig)
+    - [Notion](#notion)
   - [Development checklist](#development-checklist)
   - [Testing the driver](#testing-the-driver)
   - [Release checklist](#release-checklist)
@@ -49,36 +49,36 @@ Following are the steps to get started.
 
 ## How is the code structured?
 
-The code for the driver is inside the `src` directory. Make sure to change the `YourDriver` directory name to the name of the driver.
+The code for the driver is inside the `src` directory. Make sure to change the `Notion` directory name to the name of the driver.
 
 The driver implementation is mainly driven by the config, except the `user` and the `userFromToken` methods. Both of these methods are specific to the Oauth provider, and hence you have to implement them yourself.
 
-The `src/YourDriver/index.ts` file has the following exports.
+The `src/Notion/index.ts` file has the following exports.
 
-#### YourDriverAccessToken
+#### NotionAccessToken
 
 The type defines the properties that exist on the access token returned by your driver. You must read your OAuth provider documentation and list all the properties here.
 
 **Do not change the pre-defined `token` and `bearer` properties.**
 
 ```ts
-export type YourDriverAccessToken = {
+export type NotionAccessToken = {
   token: string
   type: 'bearer'
 }
 ```
 
-#### YourDriverScopes
+#### NotionScopes
 
 Define a union of driver scopes accepted by your OAuth provider. You can check out the [official implementations](https://github.com/adonisjs/ally/blob/develop/adonis-typings/ally.ts#L236-L268) to see how they are defined.
 
-#### YourDriverConfig
+#### NotionConfig
 
 The type defines the configuration options that your driver expects. It must specify the following mentioned properties, along with any additional properties your driver needs to be functional.
 
 ```ts
-export type YourDriverConfig = {
-  driver: 'YourDriverName'
+export type NotionConfig = {
+  driver: 'notion'
   clientId: string
   clientSecret: string
   callbackUrl: string
@@ -88,7 +88,7 @@ export type YourDriverConfig = {
 }
 ```
 
-#### YourDriver
+#### Notion
 
 The driver implementation is a standard TypeScript class that extends the base `Oauth2Driver` class. The base driver class enforces you to define the following instance properties.
 
@@ -104,22 +104,22 @@ The driver implementation is a standard TypeScript class that extends the base `
 
 ## Development checklist
 
-- [ ] I have renamed all `YourDriver` references to a more meaningful driver name inside the `src/YourDriver/index.ts` file.
-- [ ] I have renamed the `YourDriverProvider` inside the `providers/index.ts` file.
-- [ ] I have updated the driver name in the `Ally.extend` method call inside the `providers/index.ts` file.
-- [ ] I have defined the `authorizeUrl` class property.
-- [ ] I have defined the `accessTokenUrl` class property.
-- [ ] I have defined the `userInfoUrl` class property.
-- [ ] I have defined the `codeParamName` class property.
-- [ ] I have defined the `errorParamName` class property.
-- [ ] I have defined the `stateCookieName` class property.
-- [ ] I have defined the `stateParamName` class property.
-- [ ] I have defined the `scopeParamName` class property.
-- [ ] I have defined the `scopesSeparator` class property.
-- [ ] I have implemented the `accessDenied` class method.
-- [ ] I have implemented the `user` class method.
-- [ ] I have implemented the `userFromToken` class method.
-- [ ] I have updated the `standalone.ts` file to export the renamed driver file name.
+- [x] I have renamed all `Notion` references to a more meaningful driver name inside the `src/Notion/index.ts` file.
+- [x] I have renamed the `NotionProvider` inside the `providers/index.ts` file.
+- [x] I have updated the driver name in the `Ally.extend` method call inside the `providers/index.ts` file.
+- [x] I have defined the `authorizeUrl` class property.
+- [x] I have defined the `accessTokenUrl` class property.
+- [x] I have defined the `userInfoUrl` class property.
+- [x] I have defined the `codeParamName` class property.
+- [x] I have defined the `errorParamName` class property.
+- [x] I have defined the `stateCookieName` class property.
+- [x] I have defined the `stateParamName` class property.
+- [?] I have defined the `scopeParamName` class property.
+- [?] I have defined the `scopesSeparator` class property.
+- [x] I have implemented the `accessDenied` class method.
+- [x] I have implemented the `user` class method.
+- [x] I have implemented the `userFromToken` class method.
+- [x] I have updated the `standalone.ts` file to export the renamed driver file name.
 
 ## Testing the driver
 
@@ -131,12 +131,12 @@ You can test the driver by installing it locally inside your AdonisJS applicatio
 - Inform typescript about your driver by defining a mapping inside the `contracts/ally.ts` file.
 
   ```ts
-  import { YourDriverConfig, YourDriver } from 'ally-custom-driver/build/standalone'
+  import { NotionConfig, Notion } from 'ally-driver-notion/build/standalone'
 
   interface SocialProviders {
-    yourDriver: {
-      config: YourDriverConfig
-      implementation: YourDriver
+    notion: {
+      config: NotionConfig
+      implementation: Notion
     }
   }
   ```
@@ -160,7 +160,7 @@ Make sure to finish the following tasks before releasing your package.
 You can configure the redirect request by implementing the `configureRedirectRequest` method on the driver class. The method is already pre-defined and commented out.
 
 ```ts
-protected configureRedirectRequest(request: RedirectRequest<YourDriverScopes>) {
+protected configureRedirectRequest(request: RedirectRequest<NotionScopes>) {
   request.param('key', 'value')
 }
 ```

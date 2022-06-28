@@ -1,7 +1,7 @@
 {
-  "name": "ally-custom-driver",
-  "version": "0.0.0",
-  "description": "A boilerplate for a custom ally driver",
+  "name": "ally-driver-notion",
+  "version": "0.0.1",
+  "description": "A custom ally driver to support OAuth from Notion.so",
   "main": "build/providers/index.js",
   "files": [
     "build/src",
@@ -25,7 +25,7 @@
     "adonis-ally"
   ],
   "author": "",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "devDependencies": {
     "@adonisjs/ally": "^4.0.0",
     "@adonisjs/core": "^5.1.8",
@@ -45,12 +45,12 @@
   "adonisjs": {
     "instructionsMd": "./build/instructions.md",
     "env": {
-      "YOUR_DRIVER_CLIENT_ID": "",
-      "YOUR_DRIVER_CLIENT_SECRET": ""
+      "NOTION_CLIENT_ID": "",
+      "NOTION_CLIENT_SECRET": ""
     },
-    "types": "ally-custom-driver",
+    "types": "ally-driver-notion",
     "providers": [
-      "ally-custom-driver"
+      "ally-driver-notion"
     ]
   }
 }

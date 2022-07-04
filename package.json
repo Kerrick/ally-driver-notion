@@ -16,7 +16,6 @@
     "compile": "npm run lint && npm run clean && tsc",
     "build": "npm run compile && npm run copyfiles",
     "prepublishOnly": "npm run build",
-    "postinstall": "npm run build",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
     "version": "npm run build"

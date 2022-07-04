@@ -16,6 +16,7 @@
     "compile": "npm run lint && npm run clean && tsc",
     "build": "npm run compile && npm run copyfiles",
     "prepublishOnly": "npm run build",
+    "postinstall": "npm run build",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
     "version": "npm run build"
@@ -30,6 +31,7 @@
     "@adonisjs/ally": "^4.0.0",
     "@adonisjs/core": "^5.1.8",
     "@types/node": "^15.12.2",
+    "copyfiles": "^2.4.1",
     "del-cli": "^3.0.1",
     "eslint": "^7.28.0",
     "eslint-config-prettier": "^8.3.0",
